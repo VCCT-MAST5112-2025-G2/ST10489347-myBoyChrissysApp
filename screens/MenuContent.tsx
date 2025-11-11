@@ -1,14 +1,15 @@
 import React,{createContext,useState,ReactNode, Children } from "react"
 
-type courseType = "Starter" | "Main" | "Dessert";
+type CourseType = "Starter" | "Main" | "Dessert";
 
 interface MenuItem {
     id: string;
-    course:CourseType;
-    name: string 
+    course: CourseType;
+    name: string;
     description: string;
     price: number;
 }
+
 
 interface MenuContextProps {
     menuItems: MenuItem[];

@@ -20,21 +20,21 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
   return (
     //wrapped entire app .tsx with context so that home and chefs screens share the same data 
-<MenuProvider>    
-<NavigationContainer>
-  <Stack.Navigator
-  initialRouteName="Home" 
-  screenOptions={{
- headerStyle: { backgroundColor: "#80deea"},
- headerTintColor: "#fff",
- headerTitleStyle: {fontWeight:"bold"},
-  }}>
+    <MenuProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerStyle: { backgroundColor: "#80deea" },
+            headerTintColor: "#fff",
+            headerTitleStyle: { fontWeight: "bold" },
+          }}>
 
-  <Stack.Screen name="Home" component={HomeScreen} options={{title:"Menu" Overview}} />
-  <Stack.Screen name="Chef" component={ChefScreen} options={{title: "Add Menu Item"}}/>
-  <Stack.Screen name="Filter" component={FilterScreen} options={{title: "Filter Menu"}} />
-  </Stack.Navigator>
-</NavigationContainer>
-</MenuProvider>
+          <Stack.Screen name="Home" component={HomeScreen} options={{ title: "Menu" }} />
+          <Stack.Screen name="Chef" component={ChefScreen} options={{ title: "Add Menu Item" }} />
+          <Stack.Screen name="Filter" component={FilterScreen} options={{ title: "Filter Menu" }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </MenuProvider>
   );
 }
