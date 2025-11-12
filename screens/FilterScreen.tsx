@@ -3,24 +3,25 @@ import React, { useContext, useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
-import { MenuContext } from "../screens/MenuContent";
+import { MenuContext } from "./MenuContent";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 
 type FilterNav = NativeStackNavigationProp<RootStackParamList, "Filter">;
+type CourseType = "Starter" | "Main" | "Dessert";
 
 export default function FilterScreen() {
   const navigation = useNavigation<FilterNav>();
   const { menuItems } = useContext(MenuContext);
 
-  // state to store the currently selected course
-  const [selectedCourse, setSelectedCourse] = useState<"Starter" | "Main" | "Dessert" | null>(null);
+  const [selectedCourse, setSelectedCourse] = useState<CourseType | null>(null);
 
-  // filter logic: only show items matching the selected course
   const filteredItems = selectedCourse
     ? menuItems.filter((item) => item.course === selectedCourse)
     : [];
+
+  const courses: CourseType[] = ["Starter", "Main", "Dessert"];
 
   return (
     <LinearGradient
@@ -32,30 +33,20 @@ export default function FilterScreen() {
       <View style={styles.container}>
         <Text style={styles.title}>🔍 Filter Menu</Text>
 
-        {/* Filter buttons */}
         <View style={styles.filterButtons}>
-          {["Starter", "Main", "Dessert"].map((course) => (
+          {courses.map((course) => (
             <TouchableOpacity
               key={course}
-              style={[
-                styles.filterButton,
-                selectedCourse === course && styles.activeButton,
-              ]}
-              onPress={() => setSelectedCourse(course as any)}
+              style={[styles.filterButton, selectedCourse === course && styles.activeButton]}
+              onPress={() => setSelectedCourse(course)}
             >
-              <Text
-                style={[
-                  styles.filterText,
-                  selectedCourse === course && styles.activeText,
-                ]}
-              >
+              <Text style={[styles.filterText, selectedCourse === course && styles.activeText]}>
                 {course}
               </Text>
             </TouchableOpacity>
           ))}
         </View>
 
-        {/* Display filtered results */}
         <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
           {selectedCourse ? (
             filteredItems.length > 0 ? (
@@ -74,7 +65,6 @@ export default function FilterScreen() {
           )}
         </ScrollView>
 
-        {/* Navigation back */}
         <TouchableOpacity style={styles.backBtn} onPress={() => navigation.navigate("Home")}>
           <Text style={styles.backText}>Back to Home</Text>
         </TouchableOpacity>
@@ -86,19 +76,19 @@ export default function FilterScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 20
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
     textAlign: "center",
     marginVertical: 10,
-    color: "#004d40",
+    color: "#004d40"
   },
   filterButtons: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-    marginVertical: 10,
+    marginVertical: 10
   },
   filterButton: {
     backgroundColor: "#fff",
@@ -106,49 +96,49 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#007aff",
+    borderColor: "#007aff"
   },
   activeButton: {
-    backgroundColor: "#007aff",
+    backgroundColor: "#007aff"
   },
   filterText: {
     color: "#007aff",
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   activeText: {
-    color: "#fff",
+    color: "#fff"
   },
   itemBox: {
     marginVertical: 8,
     padding: 16,
     borderRadius: 12,
-    backgroundColor: "rgba(255,255,255,0.8)",
+    backgroundColor: "rgba(255,255,255,0.8)"
   },
   itemName: {
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 16
   },
   itemDesc: {
     fontStyle: "italic",
-    marginVertical: 4,
+    marginVertical: 4
   },
   itemPrice: {
     textAlign: "right",
-    fontWeight: "600",
+    fontWeight: "600"
   },
   emptyText: {
     textAlign: "center",
     marginVertical: 20,
-    color: "#333",
+    color: "#333"
   },
   backBtn: {
     backgroundColor: "#007aff",
     paddingVertical: 10,
     borderRadius: 20,
-    alignItems: "center",
+    alignItems: "center"
   },
   backText: {
     color: "#fff",
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
 });
