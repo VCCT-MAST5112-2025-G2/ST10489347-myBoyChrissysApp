@@ -8,6 +8,7 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import { MenuContext } from "./MenuContent";
 
+//
 type HomeNav = NativeStackNavigationProp<RootStackParamList, "Home">;
 
 // define the course type

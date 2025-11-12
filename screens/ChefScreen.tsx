@@ -24,7 +24,7 @@ interface MenuItem {
 }
 
 export default function ChefScreen() {
-  //  Get shared data from context
+  //  Get shared data from context 
   const { menuItems, setMenuItems } = useContext(MenuContext);
 
   //  Get navigation object
@@ -45,7 +45,7 @@ export default function ChefScreen() {
 
   const courses: CourseType[] = ["Starter", "Main", "Dessert"];
 
-  // reset form fields
+  // reset form fields after user finishes entering details 
   const resetForm = () => {
     setCourse("Starter");
     setName("");
@@ -62,12 +62,13 @@ export default function ChefScreen() {
       return;
     }
 
+    //condition ensuring price is a number with error Message ! so if parsed price isnt a number show this message
     const parsedPrice = parseInt(price);
     if (isNaN(parsedPrice)) {
       setError("Price must be a number.");
       return;
     }
-
+  // conditional use of a loop to check if we are editing an existing dish 
     if (editingItemId) {
       setMenuItems((prev) =>
         prev.map((item) =>
@@ -76,6 +77,7 @@ export default function ChefScreen() {
             : item
         )
       );
+      //condition stating that we are creating a new Menu if not editing it 
     } else {
       const newItem: MenuItem = {
         id: uuid.v4().toString(),
@@ -84,13 +86,15 @@ export default function ChefScreen() {
         description,
         price: parsedPrice,
       };
-      setMenuItems([...menuItems, newItem]);
+      setMenuItems([...menuItems, newItem]); // Data is stored and saved in the respective fields 
     }
 
-    setModalVisible(false);
-    resetForm();
+    setModalVisible(false); //modal is hidden 
+    resetForm(); //form resets for new input 
   };
 
+
+  //this handles the user's ability to edit an existing by loading existing data in the form field 
   const handleEdit = (item: MenuItem) => {
     setCourse(item.course);
     setName(item.name);
@@ -100,6 +104,7 @@ export default function ChefScreen() {
     setModalVisible(true);
   };
 
+  //this is used to delete a Dish in any course uses an alert to notify the user of what they are about to do 
   const handleDelete = (id: string) => {
     Alert.alert("Delete Dish", "Are you sure?", [
       { text: "Cancel", style: "cancel" },
@@ -111,8 +116,10 @@ export default function ChefScreen() {
     ]);
   };
 
+  //used to filter and group dishes by courseType 
   const groupedItems = (course: CourseType) => menuItems.filter((item) => item.course === course);
 
+  //User interface layout 
   return (
     <LinearGradient
       colors={["#e0f7fa", "#80deea"]}

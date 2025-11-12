@@ -8,20 +8,24 @@ import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 
+//use of Nav and Rootstack params to define the data and for navigation
 type FilterNav = NativeStackNavigationProp<RootStackParamList, "Filter">;
 type CourseType = "Starter" | "Main" | "Dessert";
 
+
 export default function FilterScreen() {
-  const navigation = useNavigation<FilterNav>();
-  const { menuItems } = useContext(MenuContext);
+  const navigation = useNavigation<FilterNav>(); //used to navigate
+  const { menuItems } = useContext(MenuContext); //uses context from the MenuContent.tsx for data
 
   const [selectedCourse, setSelectedCourse] = useState<CourseType | null>(null);
 
+
+  //use of user selection to filter courses  
   const filteredItems = selectedCourse
     ? menuItems.filter((item) => item.course === selectedCourse)
     : [];
 
-  const courses: CourseType[] = ["Starter", "Main", "Dessert"];
+  const courses: CourseType[] = ["Starter", "Main", "Dessert"]; 
 
   return (
     <LinearGradient
