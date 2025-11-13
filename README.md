@@ -46,4 +46,4 @@ Enforced type definitions for all menu item structures and context props.
 
 # Youtube Video link 
 - Code description and implementation: https://youtu.be/N_LDmuLD6mc
-- Running app: https//youtu.be/4mQG9LP_1Sg
+- Running app: https://youtu.be/4mQG9LP_1Sg
