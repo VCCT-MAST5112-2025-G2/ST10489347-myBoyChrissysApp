@@ -45,5 +45,5 @@ Defined RootStackParamList for strong type safety across navigation.
 Enforced type definitions for all menu item structures and context props.
 
 # Youtube Video link 
--Code description and implementation: https://youtu.be/N_LDmuLD6mc
--Running app: https//youtu.be/4mQG9LP_1Sg
+- Code description and implementation: https://youtu.be/N_LDmuLD6mc
+- Running app: https//youtu.be/4mQG9LP_1Sg
